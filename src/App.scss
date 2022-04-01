@@ -1,0 +1,84 @@
+body {
+  margin: 0;
+  padding: 0;
+
+  --input-shadow: #0008 0 0 2px 0.5px;
+  --item-shadow: #0005 1px 1px 5px 1px;
+  --item-shadow-hover: inset #0005 1px 1px 5px 1px;
+  --transition-time: 300ms;
+  --button-hover-scale: 1.2;
+  --color-background: #fff;
+
+  @media (prefers-contrast: more) {
+    --input-shadow: #000 0 0 0 2px;
+    --item-shadow: #0006 0 0 0 1px;
+    --item-shadow-hover: #000 0 0 0 2px;
+  }
+
+  @media (prefers-reduced-motion) {
+    --transition-time: 0.1ms;
+    --button-hover-scale: 1;
+  }
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--color-background);
+}
+
+.container {
+  background-color: var(--color-background);
+  margin: 0;
+  padding: 8px;
+  grid-row-gap: 8px;
+  display: grid;
+  grid-template-columns: fit-content(200px) 1fr;
+  grid-template-rows: repeat(4, 1.5rem) 1fr;
+  column-gap: 16px;
+
+  > {
+    div,
+    input {
+      display: none;
+    }
+  }
+
+  > label {
+    grid-column: 1;
+    cursor: pointer;
+    border-bottom: 1px solid transparent;
+    justify-self: center;
+    align-self: center;
+    padding: 0 10px 4px;
+  }
+
+  .css,
+  .styled,
+  .modules,
+  .griffel {
+    grid-column: 2;
+    grid-row: 1 / 5;
+    grid-template-columns: 220px repeat(2, 1fr);
+    grid-column-gap: 16px;
+  }
+
+  input:checked {
+    + label {
+      border-bottom-color: black;
+    }
+
+    &[value="css"] ~ .css,
+    &[value="styled"] ~ .styled,
+    &[value="modules"] ~ .modules,
+    &[value="griffel"] ~ .griffel {
+      display: grid;
+    }
+  }
+
+  pre {
+    max-height: 80vh;
+    overflow: auto;
+    border-radius: 5px;
+  }
+}
